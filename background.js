@@ -1,7 +1,12 @@
 chrome.action.onClicked.addListener(async (tab) => {
   console.log("dom-invaders background.js");
 
-  chrome.scripting.executeScript({
+  await chrome.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["styles.css"],
+  });
+
+  await chrome.scripting.executeScript({
     target: { tabId: tab.id },
     files: ["content.js"],
   });
